@@ -45,8 +45,9 @@ install() {
     cp ${ROOT_DIR}/smi_stream_dev.h ${USERSPACE_SMI_DIR}
 
     # find the location to install
-    output_dir=$(find "/lib/modules" -type f -name "bcm2835_smi_dev*" -exec dirname {} \;)
-
+#    output_dir=$(find "/lib/modules" -type f -name "bcm2835_smi_dev*" -exec dirname {} \;)
+    KERNEL_VERSION=`uname -r` 
+    output_dir=$(find "/lib/modules/${KERNEL_VERSION}" -type f -name "bcm2835_smi_dev*" -exec dirname {} \;)
     # Check if the output is empty
     if [ -z "$output_dir" ]; then
         printf "${RED}Error: module 'bcm2835_smi_dev' couldn't be found.${NC}\n"
