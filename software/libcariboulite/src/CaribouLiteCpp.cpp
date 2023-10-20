@@ -1,4 +1,5 @@
 #include <exception>
+#include <memory>
 #include "CaribouLite.hpp"
 
 std::shared_ptr<CaribouLite> CaribouLite::_instance = nullptr;
