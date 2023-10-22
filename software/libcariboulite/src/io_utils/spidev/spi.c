@@ -1,7 +1,6 @@
 /*
  * Simple Linux wrapper for access to /dev/spidev
  * File: "spi.c"
- * Credit: Alex Zorg (@azorg) @ https://github.com/azorg/spi/blob/master/spi.c
  */
 
 //-----------------------------------------------------------------------------
@@ -9,7 +8,6 @@
 //-----------------------------------------------------------------------------
 #include <unistd.h>    // close()
 #include <string.h>    // memset()
-#include <stdio.h>
 #include <fcntl.h>     // open()
 #include <sys/ioctl.h> // ioctl()
 //----------------------------------------------------------------------------
@@ -19,7 +17,7 @@
 //   or 0 by zefault
 int spi_init(spi_t *self,
              const char *device, // filename like "/dev/spidev0.0"
-             int mode,           // SPI_* (look "linux/spi/spidev...")
+             int mode,           // SPI_* (look "linux/spi/spidev.h")
              int bits,           // bits per word (usually 8)
              int speed)          // max speed [Hz]
 {
@@ -89,7 +87,7 @@ int spi_init(spi_t *self,
     return SPI_ERR_SET_SPEED;
   }
 
-  //printf("open device='%s' mode=%d bits=%d lsb=%d max_speed=%d [Hz]", device, (int)self->mode, (int)self->bits, (int)self->lsb, (int)self->speed);
+  SPI_DBG("open device='%s' mode=%d bits=%d lsb=%d max_speed=%d [Hz]", device, (int)self->mode, (int)self->bits, (int)self->lsb, (int)self->speed);
 
   return SPI_ERR_NONE;
 }
@@ -260,26 +258,4 @@ int spi_write_reg8(spi_t *self, uint8_t reg_addr, const void *tx_buf, int len)
   }
 
   return retv;
-}
-//----------------------------------------------------------------------------
-// Get error code description
-static char *io_utils_chip_types[] =
-        {
-            "SPI_ERR_NONE",
-            "SPI_ERR_OPEN",
-            "SPI_ERR_SET_MODE",
-            "SPI_ERR_GET_MODE",
-            "SPI_ERR_GET_LSB",
-            "SPI_ERR_SET_BITS",
-            "SPI_ERR_GET_BITS",
-            "SPI_ERR_SET_SPEED",
-            "SPI_ERR_GET_SPEED",
-            "SPI_ERR_READ",
-            "SPI_ERR_WRITE",
-            "SPI_ERR_EXCHANGE",
-        };
-        
-char* spi_get_code_desc(int err_code)
-{
-    return io_utils_chip_types[-err_code];
 }
