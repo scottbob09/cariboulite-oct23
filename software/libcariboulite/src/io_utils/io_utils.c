@@ -6,7 +6,7 @@
 #define ZF_LOG_TAG "IO_UTILS_Main"
 
 #include <time.h>
-//#include "pigpio/pigpio.h"
+#include "pigpio/pigpio.h"  // enabled
 #include "zf_log/zf_log.h"
 #include "io_utils.h"
 
@@ -113,7 +113,7 @@ void io_utils_usleep(int usec)
 }
 
 //=============================================================================================
-inline int io_utils_setup_interrupt(int gpio,
+inline int [[io_utils_setup_interrupt]](int gpio,
                                     gpioAlertFuncEx_t cb,
                                     void* context)
 {
