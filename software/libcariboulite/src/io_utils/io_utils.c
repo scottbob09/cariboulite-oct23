@@ -113,7 +113,7 @@ void io_utils_usleep(int usec)
 }
 
 //=============================================================================================
-inline int [[io_utils_setup_interrupt]](int gpio,
+inline int io_utils_setup_interrupt(int gpio,
                                     gpioAlertFuncEx_t cb,
                                     void* context)
 {
