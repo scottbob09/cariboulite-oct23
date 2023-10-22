@@ -6,7 +6,7 @@
 #define ZF_LOG_TAG "IO_UTILS_Main"
 
 #include <time.h>
-#include "pigpio/pigpio.h"  // enabled
+//#include "pigpio/pigpio.h"
 #include "zf_log/zf_log.h"
 #include "io_utils.h"
 
