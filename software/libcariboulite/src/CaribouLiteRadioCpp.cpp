@@ -1,4 +1,6 @@
-#include <memory>
+//#include <memory>
+#include <boost/smart_ptr.hpp>
+#include <iostream>
 #include "CaribouLite.hpp"
 
 //=================================================================
